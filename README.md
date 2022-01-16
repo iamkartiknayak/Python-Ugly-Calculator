@@ -1,3 +1,3 @@
 # Python-Ugly-Calculator
 
-This is basic calculator written using python and using QT framework
+This is a basic calculator written using python and using QT framework
