@@ -1,4 +1,5 @@
 from PyQt6 import QtWidgets
+from PyQt6.QtGui import QKeySequence
 from sys import argv
 
 from ui import Ui_MainWindow
@@ -6,7 +7,6 @@ from ui import Ui_MainWindow
 basic_operators = "+-*//%."
 numbers = "0123456789"
 previous_value = str()
-answer_calculated = False
 
 
 class PyUCalculator(Ui_MainWindow):
@@ -15,34 +15,72 @@ class PyUCalculator(Ui_MainWindow):
         self.setupUi(window)
 
         self.btn_clear.clicked.connect(lambda: self.calculate("X"))
+        self.btn_clear.setShortcut(QKeySequence("backspace"))
+
         self.btn_allClear.clicked.connect(lambda: self.label_input.setText(
             "0") or self.label_solution.setText("0"))
+        self.btn_allClear.setShortcut(QKeySequence("ctrl+c"))
+
         self.btn_divide.clicked.connect(lambda: self.calculate("/"))
+        self.btn_divide.setShortcut(QKeySequence("/"))
+
         self.btn_multiply.clicked.connect(
             lambda: self.calculate("*"))
+        self.btn_multiply.setShortcut(QKeySequence("*"))
+
         self.btn_plus.clicked.connect(
             lambda: self.calculate("+"))
+        self.btn_plus.setShortcut(QKeySequence("+"))
+
         self.btn_minus.clicked.connect(
             lambda: self.calculate("-"))
+        self.btn_minus.setShortcut(QKeySequence("-"))
+
         self.btn_mod.clicked.connect(
             lambda: self.calculate("%"))
+        self.btn_mod.setShortcut(QKeySequence("%"))
+
         self.btn_intDiv.clicked.connect(
             lambda: self.calculate("//"))
+        self.btn_intDiv.setShortcut(QKeySequence("ctrl+/"))
+
         self.btn_equals.clicked.connect(
             lambda: self.calculate("="))
+        self.btn_equals.setShortcut(QKeySequence("="))
+
         self.btn_decimal.clicked.connect(
             lambda: self.calculate("."))
+        self.btn_decimal.setShortcut(QKeySequence("."))
 
         self.btn_0.clicked.connect(lambda: self.calculate("0"))
+        self.btn_0.setShortcut(QKeySequence("0"))
+
         self.btn_1.clicked.connect(lambda: self.calculate("1"))
+        self.btn_1.setShortcut(QKeySequence("1"))
+
         self.btn_2.clicked.connect(lambda: self.calculate("2"))
+        self.btn_2.setShortcut(QKeySequence("2"))
+
         self.btn_3.clicked.connect(lambda: self.calculate("3"))
+        self.btn_3.setShortcut(QKeySequence("3"))
+
         self.btn_4.clicked.connect(lambda: self.calculate("4"))
+        self.btn_4.setShortcut(QKeySequence("4"))
+
         self.btn_5.clicked.connect(lambda: self.calculate("5"))
+        self.btn_5.setShortcut(QKeySequence("5"))
+
         self.btn_6.clicked.connect(lambda: self.calculate("6"))
+        self.btn_6.setShortcut(QKeySequence("6"))
+
         self.btn_7.clicked.connect(lambda: self.calculate("7"))
+        self.btn_7.setShortcut(QKeySequence("7"))
+
         self.btn_8.clicked.connect(lambda: self.calculate("8"))
+        self.btn_8.setShortcut(QKeySequence("8"))
+
         self.btn_9.clicked.connect(lambda: self.calculate("9"))
+        self.btn_9.setShortcut(QKeySequence("9"))
 
     def update_solution(self):
         if self.label_input.text()[-1] in numbers:
@@ -60,10 +98,6 @@ class PyUCalculator(Ui_MainWindow):
 
     def calculate(self, user_input):
         global answer_calculated
-
-        if answer_calculated:
-            answer_calculated = False
-            self.label_input.setText("0")
 
         if user_input == "=" and self.label_input.text()[-1] not in basic_operators:
             try:
